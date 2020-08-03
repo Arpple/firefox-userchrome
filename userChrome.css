@@ -1,0 +1,341 @@
+@-moz-document url(chrome://browser/content/browser.xul),
+               url(chrome://browser/content/browser.xhtml) {
+
+  /* hide navigation bar when it is not focused; use Ctrl+L to get focus */
+  /* #main-window:not([customizing]) #navigator-toolbox:not(:focus-within):not(:hover) {
+    margin-top: -22px;
+  }
+  #navigator-toolbox {
+    transition: 0.2s margin-top ease-out;
+  } */
+
+  /* hide the "Tree Style Tab" header at the top of the sidebar (only Tree Style Tab sidebar) */
+  /* #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+    display: none;
+  } */
+
+}
+
+/* 
+_____ _                 _                     _    
+/ ____(_)               | |                   | |   
+| (___  _ _ __ ___  _ __ | | ___ _ __ ___ _ __ | |_  
+\___ \| | '_ ` _ \| '_ \| |/ _ \ '__/ _ \ '_ \| __| 
+____) | | | | | | | |_) | |  __/ | |  __/ | | | |_  
+|_____/|_|_| |_| |_| .__/|_|\___|_|  \___|_| |_|\__| 
+|  ____|           | |                               
+| |__ _____  __    |_|                               
+|  __/ _ \ \/ /                                      
+| | | (_) >  <                                       
+|_|  \___/_/\_\                                      
+                                                    
+Windows Edition
+No URL Bar Version
+Designed and Coded by Miguel R. Ávila: https://github.com/MiguelRAvila
+Patched by u/CommonSenseUsed or @jruaaa on github
+All Addons by u/It_Was_the_other_guy or @MrOtherGuy
+*/
+@import url("dark_checkboxes_and_radios.css");
+@import url("dark_additional_windows.css");
+@import url("dark_context_menus.css");
+/* 
+V A R I A B L E S 
+Here you can change the opacity level and the main color of the browser. Also the color of the selections (When you select text)
+*/
+
+:root {
+  --srf-color-primary: rgb(20, 20, 20);
+  /* 
+  WARNING: Transparency breakes the window behavior, 
+  you can still add transparency but the 
+  window manager will have some bugs. 
+  */
+  --srf-color-selection: #eaeaea;
+}
+
+/* 
+G E N E R A L 
+*/
+
+window,
+#main-window,
+#toolbar-menubar,
+#TabsToolbar,
+#PersonalToolbar,
+#navigator-toolbox,
+#sidebar-box,
+#nav-bar {
+  background-color: var(--srf-color-primary) !important;
+  -moz-appearance: none !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+::selection {
+  background-color: var(--srf-color-selection);
+  /* Text color of your selection */
+  color: #141414;
+}
+
+/* 
+T A B S 
+*/
+
+:root {
+  --tabs-border: transparent !important;
+}
+
+.tab-background {
+  border: none !important;
+}
+
+.tab-background[selected="true"] {
+  -moz-appearance: none !important;
+  background-image: none !important;
+}
+
+.tabbrowser-tabs {
+  border: none !important;
+  opacity: 0 !important;
+}
+
+.tabbrowser-tab::before {
+  opacity: 0 !important;
+  border-left: none !important;
+}
+
+.tabbrowser-tab::after {
+  opacity: 0 !important;
+  border-left: none !important;
+}
+
+.titlebar-placeholder {
+  border: none !important;
+}
+
+/* 
+B U T T O N S 
+Here you can comment if you want your buttons to be showed up!
+*/
+
+.titlebar-spacer {
+  display: none !important;
+}
+
+#tracking-protection-icon-container {
+  display: none !important;
+}
+
+#PanelUI-button {
+  display: none !important;
+}
+
+.tabbrowser-tab:not([pinned]) .tab-close-button { 
+  display:none !important; 
+}
+
+/* 
+N A V B A R
+*/
+
+#navigator-toolbox::after {
+  border-bottom: 0px !important;
+  border-top: 0px !important;
+}
+#nav-bar {
+  margin-top: -1px !important;
+  border-top-width: -1px !important;
+  margin-bottom: -1px !important;
+  border-bottom-width: -1px !important;
+}
+
+/* 
+S I D E - B A R
+*/
+
+#history-panel,
+#sidebar-search-container,
+#bookmarksPanel {
+  background: var(--srf-color-primary) !important;
+}
+
+#search-box {
+  -moz-appearance: none !important;
+  background: var(--srf-color-primary) !important;
+  border-radius: 6px !important;
+}
+
+#sidebar-icon {
+  display: none !important;
+}
+
+.sidebar-placesTree {
+  color: var(--srf-color-selection) !important;
+}
+
+#sidebar-switcher-target {
+  color: var(--srf-color-selection) !important;
+}
+
+#sidebar-header {
+  background: var(--srf-color-primary) !important;
+}
+
+#sidebar-splitter {
+  border: none !important;
+  opacity: 1 !important;
+  background-color: var(--srf-color-primary) !important;
+}
+
+/* 
+U R L - B A R
+*/
+
+#urlbar[breakout] {
+  margin-inline-start: 0px !important;
+  width: 100% !important;
+  left: 0 !important;
+  top: calc(
+    (var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2
+  ) !important;
+}
+
+@-moz-document url(chrome://browser/content/browser.xhtml) {
+  #urlbar[breakout][breakout-extend] > #urlbar-background {
+    animation-name: none !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05) !important;
+  }
+}
+
+#urlbar[breakout]:not([open]) {
+  bottom: calc(
+    (var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2
+  ) !important;
+}
+
+#urlbar-background {
+  /* background: transparent !important; */
+  border: none !important;
+  animation: none !important;
+}
+
+#urlbar-input-container {
+  padding: 0 !important;
+  padding-left: 0.5em !important;
+  height: 100% !important;
+}
+
+#identity-box {
+  display: none;
+}
+
+#searchbar {
+  background: var(--bf-bg) !important;
+  border: none !important;
+}
+
+.searchbar-textbox {
+  color: var(--bf-focus-fg) !important;
+  font-weight: 700 !important;
+}
+
+/* 
+P A T C H E S
+*/
+
+#tabbrowser-tabpanels{
+  background-color: var(0,0,0) !important;
+}
+
+#statuspanel-label:-moz-lwtheme-brighttext{
+  background-color: rgb(50,50,52) !important;
+  color: rgb(187,187,189) !important;
+  border-color: grey !important;
+}
+
+.panel-subview-body,
+#permList,
+scrollbar{
+ color: inherit;
+ scrollbar-color: currentColor transparent;
+ scrollbar-width: thin 
+}
+
+#tracking-protection-icon-box {
+  visibility: collapse !important;
+}
+
+#identity-box:hover > #tracking-protection-icon-box {
+  visibility: visible !important;
+}
+
+#urlbar, .searchbar-textbox {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.urlbarView-row {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+/* Remove padding on urlbar (icons on the right break without this) */
+#urlbar-input-container {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+/* Reduce "breakout" navbar height */
+#urlbar[breakout][breakout-extend] > #urlbar-input-container {
+  height: calc(var(--urlbar-toolbar-height) - 4px) !important;
+}
+
+/* Fix breakout positioning being too high after we decreased the height */
+#urlbar[breakout][breakout-extend] {
+  top: 2px !important;
+}
+
+/* Remove padding on search one offs div */
+.search-one-offs {
+  padding-block: 0px !important;
+}
+
+/* Fix padding left of the search one-off icons */
+.search-panel-one-offs {
+  padding-left: 7px !important;
+}
+
+/* Remove margins around the search one-off icons */
+.searchbar-engine-one-off-item {
+  margin: 0px !important;
+}
+
+
+/*
+ * Remove circle, background and padding from back button
+ *
+ * Contributor(s): Skrity
+ */
+
+ :root:not([uidensity="compact"]) #back-button > .toolbarbutton-icon {
+  background-color: unset !important;
+  border: unset !important;
+  padding: var(--toolbarbutton-inner-padding) !important;
+  border-radius: var(--toolbarbutton-border-radius) !important;
+  width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+}
+
+/* Hover and Active states to mimic other buttons */
+:root:not([uidensity="compact"]) #back-button:hover:not([disabled]) > .toolbarbutton-icon {
+  background-color: var(--toolbarbutton-hover-background) !important;
+}
+
+:root:not([uidensity="compact"]) #back-button:active:not([disabled]) > .toolbarbutton-icon {
+  background-color: var(--toolbarbutton-active-background) !important;
+}
+
+/* Remove pre-padding */
+:root:not([uidensity="compact"]) #back-button {
+  padding-inline-start: 3px !important;
+}
