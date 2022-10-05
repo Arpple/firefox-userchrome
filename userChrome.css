@@ -51,6 +51,13 @@ Here you can change the opacity level and the main color of the browser. Also th
   window manager will have some bugs. 
   */
   --srf-color-selection: #eaeaea;
+  --toolbarbutton-border-radius: 0;
+}
+
+#tabbrowser-tabs {
+  --user-tab-rounding: 0px;
+  --tab-background-inactive: rgb(30, 30, 30);
+  --tab-background-active: rgb(55, 55, 55);
 }
 
 /* 
@@ -84,15 +91,19 @@ T A B S
 
 :root {
   --tabs-border: transparent !important;
+  --tab-min-height:      25px !important; /* adjust */
 }
 
 .tab-background {
   border: none !important;
+  border-radius: var(--user-tab-rounding) !important;
+  background-color: var(--tab-background-inactive) !important;
 }
 
 .tab-background[selected="true"] {
   -moz-appearance: none !important;
   background-image: none !important;
+  background-color: var(--tab-background-active) !important;
 }
 
 .tabbrowser-tabs {
@@ -112,6 +123,20 @@ T A B S
 
 .titlebar-placeholder {
   border: none !important;
+}
+
+#TabsToolbar, #tabbrowser-tabs {
+    --tab-min-height: 29px !important;
+}
+    /* Tweak for covering a line at the bottom of the active tab on some themes 8/11/2021 */
+#main-window[sizemode="normal"] #toolbar-menubar[autohide="true"] + #TabsToolbar, 
+#main-window[sizemode="normal"] #toolbar-menubar[autohide="true"] + #TabsToolbar #tabbrowser-tabs {
+    --tab-min-height: 30px !important;
+}
+#scrollbutton-up,
+#scrollbutton-down {
+    border-top-width: 0 !important;
+    border-bottom-width: 0 !important;
 }
 
 /* 
@@ -163,7 +188,7 @@ S I D E - B A R
 #search-box {
   -moz-appearance: none !important;
   background: var(--srf-color-primary) !important;
-  border-radius: 6px !important;
+  border-radius: 0px !important;
 }
 
 #sidebar-icon {
